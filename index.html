@@ -3,86 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uma cartinha para você 💗</title>
+  <meta name="theme-color" content="#111111">
+  <title>Uma cartinha para você 🖤</title>
   <style>
-    :root { --pink:#f4a6c1; --pink-dark:#d85f91; --pink-light:#fff0f6; --text:#684454; }
-    * { box-sizing:border-box; }
-    body {
-      margin:0; min-height:100vh; font-family:"Segoe UI",Arial,sans-serif; color:var(--text);
-      background:linear-gradient(145deg,#fff8fb,#ffe5ef); display:grid; place-items:center;
-      padding:24px 14px; overflow-x:hidden;
+    :root {
+      --black: #111111;
+      --black-soft: #1d1b1d;
+      --white: #fffafc;
+      --pink: #f2a0c1;
+      --pink-bright: #ff78ad;
+      --text: #f8edf2;
+      --muted: #d8c6ce;
     }
-    .hearts { position:fixed; inset:0; pointer-events:none; overflow:hidden; opacity:.35; }
-    .hearts span { position:absolute; bottom:-50px; color:#e98caf; font-size:22px; animation:float 12s linear infinite; }
-    .hearts span:nth-child(1) {left:8%;} .hearts span:nth-child(2) {left:28%;animation-delay:3s;font-size:30px;}
-    .hearts span:nth-child(3) {left:53%;animation-delay:6s;} .hearts span:nth-child(4) {left:77%;animation-delay:1.5s;font-size:27px;}
-    .hearts span:nth-child(5) {left:92%;animation-delay:4.5s;}
-    @keyframes float {to {transform:translateY(-115vh) rotate(25deg);opacity:0;}}
-    .card { position:relative;z-index:1;width:min(100%,680px);background:rgba(255,255,255,.95);border:1px solid #f8cbdc;
-      border-radius:26px;padding:clamp(24px,5vw,44px);box-shadow:0 18px 55px rgba(190,91,133,.15); }
-    .top-heart {font-size:38px;text-align:center;margin-bottom:8px;}
-    h1 {text-align:center;color:var(--pink-dark);margin:0 0 10px;font-size:clamp(25px,5vw,34px);}
-    .subtitle {text-align:center;line-height:1.6;margin:0 auto 25px;max-width:460px;}
-    label {display:block;font-weight:650;margin:18px 0 8px;}
-    input[type=password] {width:100%;border:1px solid #edbfd1;border-radius:13px;padding:14px 15px;font-size:16px;outline:none;color:var(--text);background:#fffafd;}
-    input[type=password]:focus {border-color:var(--pink-dark);box-shadow:0 0 0 3px #fce1eb;}
-    button {border:0;border-radius:13px;padding:13px 20px;width:100%;margin-top:14px;color:white;background:var(--pink-dark);font-size:16px;font-weight:700;cursor:pointer;}
-    button:hover {background:#c94f82;}
-    .hint {background:var(--pink-light);border-radius:14px;padding:13px 15px;margin-top:16px;font-size:14px;line-height:1.55;}
-    #error {min-height:22px;color:#b83265;text-align:center;margin:12px 0 0;font-size:14px;}
-    #letter {display:none;}
-    .photo-area {background:#fff8fb;border:2px dashed #efb5cc;border-radius:18px;padding:18px;text-align:center;margin:24px 0;}
-    .photo-area p {margin:4px 0 12px;font-size:14px;}
-    .our-photo {display:block;width:100%;max-width:460px;max-height:520px;object-fit:cover;border-radius:16px;margin:16px auto 0;box-shadow:0 8px 24px rgba(190,91,133,.16);}
-    .letter-text {white-space:pre-line;line-height:1.85;font-size:15.5px;background:#fff9fc;border-left:4px solid var(--pink);border-radius:12px;padding:20px;overflow-wrap:anywhere;}
-    .signature {text-align:center;color:var(--pink-dark);font-weight:700;font-size:19px;margin-top:24px;}
-    .small {text-align:center;color:#a77b8e;font-size:12px;margin-top:22px;}
-    @media(max-width:480px) {.card{border-radius:20px;}.letter-text{font-size:14.5px;padding:15px;}}
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 28px 14px;
+      display: grid; place-items: center;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(242,160,193,.16), transparent 30%),
+        radial-gradient(circle at 90% 85%, rgba(255,120,173,.12), transparent 28%),
+        var(--black);
+      overflow-x: hidden;
+    }
+    .sparkles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+    .sparkles span {
+      position: absolute; color: var(--pink); opacity: .5; bottom: -40px;
+      font-size: 22px; animation: float 13s linear infinite;
+    }
+    .sparkles span:nth-child(1) { left: 8%; }
+    .sparkles span:nth-child(2) { left: 28%; animation-delay: 3s; font-size: 30px; }
+    .sparkles span:nth-child(3) { left: 54%; animation-delay: 6s; }
+    .sparkles span:nth-child(4) { left: 77%; animation-delay: 1.5s; font-size: 27px; }
+    .sparkles span:nth-child(5) { left: 92%; animation-delay: 4.5s; }
+    @keyframes float { to { transform: translateY(-115vh) rotate(25deg); opacity: 0; } }
+    .card {
+      position: relative; z-index: 1; width: min(100%, 720px);
+      padding: clamp(24px, 5vw, 46px);
+      background: linear-gradient(150deg, #211b20, #151315);
+      border: 1px solid rgba(242,160,193,.38); border-radius: 26px;
+      box-shadow: 0 22px 70px rgba(0,0,0,.48), 0 0 35px rgba(242,160,193,.08);
+    }
+    .heart { text-align: center; font-size: 38px; margin-bottom: 8px; }
+    h1 { color: var(--pink); text-align: center; font-size: clamp(27px, 5vw, 36px); margin: 0 0 12px; }
+    .intro { color: var(--muted); text-align: center; line-height: 1.7; max-width: 500px; margin: 0 auto 25px; }
+    .open-button {
+      display: block; width: min(100%, 330px); margin: 0 auto;
+      border: 0; border-radius: 14px; padding: 15px 22px;
+      color: #171116; background: linear-gradient(100deg, var(--pink), var(--pink-bright));
+      font-size: 16px; font-weight: 750; cursor: pointer;
+      box-shadow: 0 8px 24px rgba(255,120,173,.2);
+      transition: transform .2s, filter .2s;
+    }
+    .open-button:hover { transform: translateY(-2px); filter: brightness(1.06); }
+    #letter { display: none; margin-top: 30px; animation: appear .65s ease both; }
+    @keyframes appear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .photo-wrap {
+      margin: 0 auto 26px; padding: 12px; max-width: 510px;
+      border: 1px solid rgba(242,160,193,.45); border-radius: 20px;
+      background: #100e10; text-align: center;
+    }
+    .photo-wrap img {
+      display: block; width: 100%; max-height: 560px; object-fit: contain;
+      border-radius: 13px; background: #211b20;
+    }
+    .photo-caption { color: var(--pink); font-size: 13px; margin: 11px 0 0; }
+    .letter-text {
+      white-space: pre-line; overflow-wrap: anywhere; line-height: 1.9;
+      font-size: 15.5px; color: #f8edf2; background: rgba(255,255,255,.035);
+      border-left: 3px solid var(--pink); border-radius: 12px; padding: 20px;
+    }
+    .signature { text-align: center; color: var(--pink); font-size: 20px; font-weight: 700; margin-top: 25px; }
+    .footer { color: #bcaab2; text-align: center; font-size: 12px; margin-top: 22px; }
+    .no-photo { display: none; color: #ffc1d8; font-size: 13px; padding: 12px; }
+    @media (max-width: 480px) {
+      .card { border-radius: 20px; }
+      .letter-text { font-size: 14.5px; padding: 15px; }
+    }
   </style>
 </head>
 <body>
-  <div class="hearts" aria-hidden="true"><span>♡</span><span>♥</span><span>♡</span><span>♥</span><span>♡</span></div>
+  <div class="sparkles" aria-hidden="true"><span>♡</span><span>♥</span><span>✧</span><span>♥</span><span>♡</span></div>
+
   <main class="card">
-    <section id="login">
-      <div class="top-heart">💗</div>
-      <h1>Tenho uma coisinha pra você...</h1>
-      <p class="subtitle">Preparei esse cantinho com carinho. Mas antes, você precisa descobrir a palavrinha secreta. 🌷</p>
-      <form id="loginForm">
-        <label for="password">Senha secreta</label>
-        <input id="password" type="password" placeholder="Digite a senha..." autocomplete="off">
-        <button type="submit">Abrir minha cartinha 💌</button>
-      </form>
-      <div class="hint"><strong>💡 Dicas para acertar:</strong><br>• São duas palavras.<br>• É uma frase que demonstra um sentimento muito especial.<br>• Começa com “eu” e termina com “amo”.</div>
-      <p id="error" role="status"></p>
-    </section>
+    <div class="heart">🖤</div>
+    <h1>Uma cartinha para você</h1>
+    <p class="intro">Preparei esse cantinho com muito carinho. Tem uma coisinha que eu queria te dizer... 💗</p>
+
+    <button class="open-button" id="openLetter" type="button">Abrir minha cartinha 💌</button>
+
     <section id="letter">
-      <div class="top-heart">💞</div>
-      <h1>Uma cartinha para você</h1>
-      <p class="subtitle">Queria que você lesse isso com carinho. Você é muito especial. 💗</p>
-      <div class="photo-area">
-        <div style="font-size:30px">📷</div>
-        <strong>Nosso cantinho de fotos</strong>
-        <p>Uma lembrança especial nossa.</p>
-        <img class="our-photo" src="https://cdn.discordapp.com/attachments/991762554139447396/1572861249811644476/46c11d66-01da-4695-95d3-c124422c24a5.jpg?ex=6affe8b0&is=6afe9730&hm=59e77a53ec0d65c89504ff872d98745f81412b7fdee5baf704e61b28cf792dd3&" alt="Nossa foto" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend','<p style=&quot;color:#b83265&quot;>Não foi possível carregar a foto. O link pode ter expirado.</p>');">
+      <div class="photo-wrap">
+        <img src="foto.png"" alt="Nossa foto" onerror="this.style.display='none'; document.getElementById('photoError').style.display='block';">
+        <p class="no-photo" id="photoError">Não foi possível carregar a foto pelo link. Se isso acontecer, envie a imagem diretamente para o repositório do GitHub.</p>
+        <p class="photo-caption">Uma lembrança especial nossa ♡</p>
       </div>
+
       <div class="letter-text">nega, eu queria te pedir perdão por tudo isso, de verdade. eu nunca quis fazer vc se sentir assim e muito menos causar qualquer tipo de dor ou preocupação em vc. eu sei q talvez minhas atitudes nn tenham sido as melhores, mas quero q vc saiba q meus sentimentos por vc são sinceros. eu tenho muito medo de te perder, e acho q esse medo acaba fazendo eu pensar em coisas q nem deveriam passar pela minha cabeça. quando vc falava sobre a idade, eu acabava ficando cada vez mais inseguro, pensando em várias coisas e criando medos q talvez nem façam sentido. mas eu nn quero q esse medo atrapalhe oq a gente tem, pq vc eh muito especial pra mim e eu gosto mtmtmt de estar com vc. eu nn quero q vc sinta q precisa me prometer alguma coisa ou q precisa ter todas as respostas sobre oq vai acontecer entre a gente. eu só quero q a gente possa continuar se gostando, se conhecendo e vivendo nossos momentos juntos, sem pressa e sem cobranças. eu gosto de vc pelo q vc eh, pelo jeito q vc me faz sentir e por tudo q a gente compartilha. quero q vc se sinta bem cmg, q possa ser vc mesma e q nunca pense q precisa fazer algo só pra me deixar feliz. eu realmente gosto de vc e quero q as coisas aconteçam naturalmente, no tempo certo pra nós dois. me desculpa por ter deixado meus medos falarem mais alto e por qualquer coisa q tenha te magoado. eu nn quero q vc fique preocupada com o futuro, pq pra mim oq importa agora eh poder estar perto de vc, cuidar de vc, te fazer sorrir e aproveitar cada momento q a gente tem. eu te amo mtmtmt, nega, e independente de como as coisas aconteçam, quero q vc saiba q meu carinho por vc eh enorme. nn precisa me dar nenhuma resposta agora, nem se preocupar em definir nada. só quero q vc saiba oq eu sinto e q eu quero q a gente fique bem. me perdoa, amor, eu te amo muito</div>
-      <div class="signature">Com carinho, 💗</div>
-      <p class="small">Feito especialmente para você.</p>
+
+      <div class="signature">Com carinho, 🩷</div>
+      <p class="footer">Feito especialmente para você.</p>
     </section>
   </main>
+
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const password = document.getElementById('password');
-      const error = document.getElementById('error');
-      if (password.value.trim().toLowerCase() === 'eu te amo') {
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('letter').style.display = 'block';
-      } else {
-        error.textContent = 'Quase! Tente de novo. Você consegue. 💕';
-        password.value = '';
-        password.focus();
-      }
+    document.getElementById('openLetter').addEventListener('click', function () {
+      document.getElementById('letter').style.display = 'block';
+      this.style.display = 'none';
+      document.getElementById('letter').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   </script>
 </body>
